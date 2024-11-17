@@ -36,6 +36,20 @@ app.get('/contact-me', async (req, res) => {
     }
 });
 
+app.get('*', async (req, res) => {
+    const data = await fs.readFile(path.join(__dirname, '404.html'), 'utf-8');
+    res.status(404).send(data);
+});
+
+// Catch-all route for 404
+// app.use(async (req, res) => {
+//     try {
+//       const data = await fs.readFile(path.join(__dirname, '404.html'), 'utf-8');
+//       res.status(404).send(data);
+//     } catch (err) {
+//       res.status(500).send('Internal Server Error');
+//     }
+//   });
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
